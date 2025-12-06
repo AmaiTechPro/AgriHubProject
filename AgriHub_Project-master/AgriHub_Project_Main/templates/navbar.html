@@ -26,6 +26,28 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <ul class="navbar-nav mb-2 mb-lg-0"> 
+
+
+{% load static %}
+{% load i18n %}
+
+...
+{% if request.user.is_authenticated and request.user.groups.all.0.name == 'Farmer_Seller' %}
+<li class="nav-item">
+    <a class="nav-link btn btn-sm btn-success text-white" 
+       href="/admin/store/product/add/" 
+       style="padding: 5px 10px; margin-left: 10px;">
+        + ADD PRODUCE
+    </a>
+</li>
+{% endif %}
+
+
+
+
+
+
+
                     <li class="nav-item">
                         <a class="nav-link active" href="{% url 'store:home' %}">Home</a>
                     </li>

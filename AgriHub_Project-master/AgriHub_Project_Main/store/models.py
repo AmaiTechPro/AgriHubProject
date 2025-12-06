@@ -33,6 +33,23 @@ class Address(models.Model):
         return self.locality
 
 
+
+# In store/models.py, ADD THIS MODEL:
+
+class FarmerProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="User Account")
+    farm_name = models.CharField(max_length=150, verbose_name="Farm Name or Business Name")
+    farm_location = models.CharField(max_length=200, verbose_name="Primary Farm/Business Location")
+    phone_number = models.CharField(max_length=15, verbose_name="Contact Phone Number")
+    is_verified = models.BooleanField(default=False, verbose_name="Is Verified by Admin?")
+
+    def __str__(self):
+        return self.farm_name + " (" + self.user.username + ")"
+
+# --- END OF MODELS ---
+
+
+
 class Category(models.Model):
     # Renamed to Crop Type Category
     title = models.CharField(max_length=50, verbose_name="Crop Type Title")

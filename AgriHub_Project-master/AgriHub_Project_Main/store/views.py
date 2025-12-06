@@ -6,6 +6,10 @@ from django.utils.decorators import method_decorator
 from django.db.models import Q
 from decimal import Decimal # Required for handling Decimal field calculati
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group # Needed for Group checks
+from .models import FarmerProfile # Needed for Farmer specific data
+
+
 
 # --- AGRIHUB MODELS ---
 from .models import Product, Category, Cart, Order, Address, Inquiry
@@ -182,26 +186,48 @@ def remove_address(request, id):
 
 
 
-# In store/views.py
+
+# Find and REPLACE the existing RegistrationView class:
 
 class RegistrationView(View):
     def get(self, request):
-        # Instantiate a blank form for GET requests
-        form = UserCreationForm() 
+        form = UserCreationForm()
         return render(request, 'account/register.html', {'form': form})
 
     def post(self, request):
-        # Process the submitted form data for POST requests
         form = UserCreationForm(request.POST)
+        is_farmer = request.POST.get('is_farmer') # Check for the new checkbox field
+        
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f"Welcome to AgriHub, {username}! Please log in.")
+            # 1. Save the new Django User
+            user = form.save()
+            
+            # 2. Check Role and Assign Group
+            if is_farmer:
+                # CRITICAL: Create the dedicated Farmer Profile record
+                FarmerProfile.objects.create(
+                    user=user,
+                    farm_name=f"{user.username}'s New Farm", 
+                    farm_location="Needs Update",
+                    phone_number="Needs Update"
+                )
+                # Assign to Farmer Group (RBAC)
+                farmer_group, created = Group.objects.get_or_create(name='Farmer_Seller')
+                user.groups.add(farmer_group)
+                messages.success(request, f"Welcome, Farmer {user.username}! Your selling profile has been created.")
+            else:
+                # Assign standard Consumer Group
+                consumer_group, created = Group.objects.get_or_create(name='Consumer_Buyer')
+                user.groups.add(consumer_group)
+                messages.success(request, f"Welcome to AgriHub, {user.username}! Please log in to shop.")
+                
             return redirect('store:login')
         else:
-            # If invalid, re-render the page with the form and errors
-            messages.error(request, "Registration failed. Please check the fields below.")
+            # If invalid, re-render the page with form and errors
+            messages.error(request, "Registration failed. Please correct the errors.")
             return render(request, 'account/register.html', {'form': form})
+
+
 
 
 
