@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
@@ -229,9 +230,85 @@ class RegistrationView(View):
 
 
 
-
-
-
 def test(request):
     """Placeholder view for testing."""
     return render(request, 'store/test.html')
+
+
+
+
+# Add the Delete View (CRUD: DELETE)
+@login_required
+def farmer_delete_produce(request, pk):
+    """Deletes a produce item (CRUD: DELETE)."""
+    product = get_object_or_404(Product, pk=pk)
+    
+    if request.method == 'POST':
+        # The actual delete operation
+        product.delete()
+        messages.success(request, f"Produce '{product.title}' successfully deleted.")
+        return redirect('store:home') # Redirect to homepage or dashboard
+        
+    context = {'product': product}
+    return render(request, 'store/farmer_confirm_delete.html', context)\
+    
+
+
+    # In store/views.py, add this function:
+
+# In store/views.py, add this function:
+
+@login_required
+def farmer_edit_produce(request, pk):
+    """Front-end view for Farmers to edit an existing produce item (CRUD: UPDATE)."""
+    # 1. Ensure the product exists
+    product = get_object_or_404(Product, pk=pk)
+    
+    # 2. Add privilege check (optional but secure: ensure the current user owns this product)
+    # NOTE: This requires adding a foreign key 'farmer' to the Product model. 
+    # Since we skipped that, we rely on the Admin permissions being set correctly.
+
+    if request.method == 'POST':
+        # Populate the form with the POST data and the existing product instance
+        form = FarmerProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Produce '{product.title}' updated successfully.")
+            return redirect('store:home') # Redirect to homepage or dashboard
+        else:
+            messages.error(request, "Update failed. Please correct errors.")
+    else:
+        # GET request: display the form pre-filled with current data
+        form = FarmerProductForm(instance=product)
+
+    context = {'form': form, 'product': product, 'editing': True}
+    return render(request, 'store/farmer_add_produce.html', context)
+
+
+
+
+
+
+@login_required
+def add_produce_view(request):
+    """Front-end view for Farmers to add a new produce item."""
+    # NOTE: In a complete app, you would add a check here to ensure only 'Farmer_Seller' can access this page.
+    
+    if request.method == 'POST':
+        # Instantiates the form with POST data and uploaded files
+        # FarmerProductForm must be correctly defined in store/forms.py
+        form = FarmerProductForm(request.POST, request.FILES) 
+        if form.is_valid():
+            # Save the product
+            form.save()
+            
+            messages.success(request, "New produce item added successfully!")
+            return redirect('store:home') # Redirect to the homepage or a dashboard
+        else:
+            messages.error(request, "Failed to add product. Check required fields and try again.")
+    else:
+        # GET request: display the blank form
+        form = FarmerProductForm()
+
+    context = {'form': form}
+    return render(request, 'store/farmer_add_produce.html', context)

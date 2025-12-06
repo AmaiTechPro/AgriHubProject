@@ -38,6 +38,20 @@ urlpatterns = [
     path('contact/', views.contact, name="contact"),
     path('product/test/', views.test, name="test"),
     
+
+    # In store/urls.py, add these paths:
+
+    # ... existing paths ...
+    path('farmer/add-produce/', views.add_produce_view, name="add-produce-form"),
+    
+    # NEW CRUD PATHS
+    path('farmer/edit/<int:pk>/', views.farmer_edit_produce, name="edit-produce"),
+    path('farmer/delete/<int:pk>/', views.farmer_delete_produce, name="delete-produce"),
+    
+    # ... rest of paths ...
+
+
+
     # URL for Products (Specific Paths)
     path('product/<slug:slug>/', views.detail, name="product-detail"),
     path('categories/', views.all_categories, name="all-categories"),
