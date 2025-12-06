@@ -5,6 +5,19 @@
 
     {% block content %}
 
+
+<style>
+    /* EMERGENCY CSS OVERRIDE: FORCES DROPDOWN TO DISPLAY */
+    #country, #country2 {
+        /* This is the highest level of override to force the element to appear */
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+</style>
+
+
+
       <div class="container">
         <section class="py-5 bg-light rounded shadow-sm mb-4">
           <div class="container">
@@ -105,9 +118,20 @@
                         <input class="form-control form-control-lg" id="company2" type="text" placeholder="Alternate organization name">
                       </div>
                       <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase fw-bold" for="country2">Country</label>
-                        <select class="selectpicker country" id="country2" data-width="fit" data-style="form-control form-control-lg" data-title="Select country"></select>
-                       
+                        <label class="text-small text-uppercase fw-bold" for="country">Country</label>
+                    
+                 <select class="form-control" id="country" name="country" style="height: 50px;">
+                  <option value="" selected disabled>Select Country</option>
+                      <option value="KE">Kenya</option>
+                   <option value="UG">Uganda</option>
+                      <option value="TZ">Tanzania</option>
+                    <option value="NG">Nigeria</option>
+                   <option value="US">United States</option>
+                   <option value="GB">United Kingdom</option>
+                 <option value="DE">Germany</option>
+              </select>
+
+
 
                       </div>
                       <div class="col-lg-12 form-group">
