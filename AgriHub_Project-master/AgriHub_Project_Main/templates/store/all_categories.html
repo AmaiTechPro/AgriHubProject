@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    
+    <div class="container">
+        <section class="py-5 bg-light rounded shadow-sm mb-4">
+            <div class="container">
+                <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="h2 text-uppercase mb-0 text-success fw-bold">All Crop Types</h1>
+                    </div>
+                    <div class="col-lg-6 text-lg-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-transparent">
+                                <li class="breadcrumb-item"><a href="{% url 'store:home' %}" class="text-dark">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Crop Types</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="row g-4">
+                
+                {% if categories %}
+                    {% for category in categories %}
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card border-0 shadow-sm rounded-3 overflow-hidden h-100">
+                            
+                            <a class="category-item d-block text-center" 
+                               href="{% url 'store:category-products' category.slug %}">
+                                
+                                {% if category.category_image %}
+                                    <img class="img-fluid" src="{{ category.category_image.url }}" 
+                                         alt="{{ category.title }}" style="height: 250px; object-fit: cover; width: 100%;">
+                                {% else %}
+                                    <img class="img-fluid" src="{% static 'img/cat-placeholder.jpg' %}" 
+                                         alt="{{ category.title }}" style="height: 250px; object-fit: cover; width: 100%;">
+                                {% endif %}
+                            </a>
+
+                            <div class="card-body text-center">
+                                <h5 class="fw-bold mb-0 text-success">{{ category.title }}</h5>
+                                <p class="text-muted small mt-1">{{ category.description|default:"Browse all farm produce under this category." }}</p>
+                                
+                                <a href="{% url 'store:category-products' category.slug %}" class="btn btn-sm btn-outline-success">
+                                    View Produce ({{ category.product_set.count }})
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center py-5">
+                        <h4 class="text-muted">No Crop Types have been added yet.</h4>
+                        <p>Please log in to the admin panel to add your first categories.</p>
+                    </div>
+                {% endif %}
+
+            </div>
+        </section>
+    </div>
+{% endblock content %}
+
+

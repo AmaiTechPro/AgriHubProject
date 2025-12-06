@@ -1,0 +1,303 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block content %}
+
+      <div class="container py-5">
+        <h1 class="text-success">AgriHub Theme Boilerplate</h1>
+        <p class="lead">This page demonstrates the consistent AgriHub UI across core Bootstrap elements.</p>
+
+        <div class="jumbotron bg-light p-5 rounded shadow-sm">
+          <h1 class="text-dark">Kitchen Sink Demo</h1>
+          <p class="text-muted">A quick preview of every AgriHub themed UI component.</p>
+          <p>
+            <a class="btn btn-success btn-lg" href="#">Get Started »</a>
+            <a class="btn btn-outline-success btn-lg" href="#">See Demo »</a>
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+
+            <div class="card mb-4 border-0 shadow-sm" id="headings">
+              <div class="card-header bg-success text-white fw-bold">Headings</div>
+              <div class="card-body">
+                <h1 class="page-header text-success">Page Header<small class="text-muted"> With Small Text</small></h1>
+                <h1>This is an h1 heading</h1>
+                <h2>This is an h2 heading</h2>
+                <h3 class="text-success">This is an h3 heading</h3>
+                <h4>This is an h4 heading</h4>
+                <h5>This is an h5 heading</h5>
+                <h6>This is an h6 heading</h6>
+              </div>
+            </div>
+
+            <div class="card mb-4 border-0 shadow-sm" id="tables">
+              <div class="card-header bg-success text-white fw-bold">Tables</div>
+              <div class="card-body">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Produce Type</th>
+                      <th>Theme Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Tomatoes</td>
+                      <td>Are styled with the theme</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Potatoes</td>
+                      <td>Do you like the green?</td>
+                    </tr>
+                    <tr class="table-success">
+                      <td>3</td>
+                      <td>Fresh Greens</td>
+                      <td>Success (Theme Primary)</td>
+                    </tr>
+                    <tr class="table-danger">
+                      <td>4</td>
+                      <td>Expired Produce</td>
+                      <td>Danger</td>
+                    </tr>
+                    <tr class="table-warning">
+                      <td>5</td>
+                      <td>Low Stock Alert</td>
+                      <td>Warning</td>
+                    </tr>
+                    <tr class="table-active">
+                      <td>6</td>
+                      <td>Active Item</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table class="table table-striped table-bordered table-sm">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Farm Name</th>
+                      <th>Table Demo</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Green Acre Farm</td>
+                      <td>This one is striped and bordered</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Local Harvest Co.</td>
+                      <td>It looks clean!</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="card mb-4 border-0 shadow-sm" id="content-formatting">
+              <div class="card-header bg-success text-white fw-bold">Content Formatting & Typography</div>
+              <div class="card-body">
+                <p class="lead">This is a lead paragraph (AgriHub main text).</p>
+                <p>This is an <b>ordinary paragraph</b> that is <i>long enough</i> to wrap to
+                  <u>multiple lines</u> so that you can see how the line spacing looks.
+                </p>
+                <p class="text-muted">Muted color paragraph.</p>
+                <p class="text-warning">Warning color paragraph (Low stock).</p>
+                <p class="text-danger">Danger color paragraph (Out of stock).</p>
+                <p class="text-info">Info color paragraph (Seasonal update).</p>
+                <p class="text-success">Primary color paragraph (AgriHub Green).</p>
+
+                <nav aria-label="...">
+                  <ul class="pagination">
+                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">1</a></li>
+                    <li class="page-item active bg-success border-success"><span class="page-link">2<span class="sr-only">(current)</span></span></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">Next</a></li>
+                  </ul>
+                </nav>
+
+                <p><small>This is text in a <code>small</code> wrapper. <abbr title="Harvest Date">HD</abbr>.</small></p>
+                <hr>
+
+                <address><strong>AgriHub Support, Inc.</strong><br> Dedan Kimathi University of Technology<br> Kenya<br><abbr title="Phone">P:</abbr> +254 745 422 895</address>
+                <address class="col-6"><strong>Brian David Amai</strong><br><a href="mailto:#">amaibrian2@gmail.com</a></address>
+                <hr>
+
+                <blockquote>"The system strengthens farmer-to-consumer connections."<small>AgriHub Project Justification</small></blockquote>
+                <hr>
+
+                <div class="row">
+                  <div class="col-xs-6">
+                    <ul class="text-dark">
+                      <li>Normal Unordered List</li>
+                      <li>Produce List Item
+                        <ul>
+                          <li>With Nested Item</li>
+                        </ul>
+                      </li>
+                      <li>Uses Bullets</li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-6">
+                    <ol class="text-dark">
+                      <li>Normal Ordered List</li>
+                      <li>Delivery Steps
+                        <ol>
+                          <li>Farmer Accepts</li>
+                          <li>Produce Packed</li>
+                        </ol>
+                      </li>
+                      <li>System Stages</li>
+                    </ol>
+                  </div>
+                </div>
+                <hr>
+                <pre class="bg-light p-3 rounded text-dark">\nfunction placeAgriOrder() {  // Checkout logic;  var status = "Success";  return status;}                        </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4 border-0 shadow-sm" id="forms">
+          <div class="card-header bg-success text-white fw-bold">Forms</div>
+          <div class="card-body">
+
+            <form>
+              <fieldset>
+                <legend class="text-success">Registration Form</legend>
+                <div class="form-group">
+                  <label for="exampleInputEmail">Email address</label>
+                  <input class="form-control" id="exampleInputEmail" type="text" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword">Password</label>
+                  <input class="form-control" id="exampleInputPassword" type="password" placeholder="Password">
+                </div>
+                <div class="form-check form-group">
+                  <input class="form-check-input" id="checkbox-1" type="checkbox">
+                  <label class="form-check-label" for="checkbox-1">Agree to Terms & Conditions</label>
+                </div>
+                <button class="btn btn-success" type="submit">Submit</button>
+              </fieldset>
+            </form>
+
+            <hr class="my-5">
+
+            <form class="form-inline">
+              <input class="form-control mb-2 mr-sm-2" type="text" placeholder="Email">
+              <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input class="form-control" id="inlineFormInputGroupUsername2" type="text">
+              </div>
+              <div class="form-check mb-2 mr-sm-2">
+                <input class="form-check-input" id="inlineFormCheck" type="checkbox">
+                <label class="form-check-label" for="inlineFormCheck">Remember Me</label>
+              </div>
+              <button class="btn btn-success mb-2" type="submit">Login</button>
+            </form>
+
+            <hr class="my-5">
+
+            <h4 class="mb-5 text-success">Horizontal Form</h4>
+            <form>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="inputEmail3">Email</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="inputEmail3" type="email" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="inputPassword3">Password</label>
+                <div class="col-sm-10">
+                  <input class="form-control" id="inputPassword3" type="password" placeholder="Password">
+                </div>
+              </div>
+              <fieldset class="form-group">
+                <div class="row">
+                  <legend class="col-form-label col-sm-2 pt-0">User Type</legend>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" id="gridRadios1" type="radio" name="gridRadios" value="option1" checked="">
+                      <label class="form-check-label" for="gridRadios1">Buyer</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" id="gridRadios2" type="radio" name="gridRadios" value="option2">
+                      <label class="form-check-label" for="gridRadios2">Farmer</label>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="form-group row">
+                <div class="col-sm-2">Custom Checkbox</div>
+                <div class="col-sm-10">
+                  <div class="custom-control custom-checkbox">
+                    <input class="custom-control-input" id="customCheck1" type="checkbox">
+                    <label class="custom-control-label" for="customCheck1">I confirm my details are correct</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-10">
+                  <button class="btn btn-success" type="submit">Sign in</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="card mb-4 border-0 shadow-sm" id="buttons">
+          <div class="card-header bg-success text-white fw-bold">Buttons</div>
+          <div class="card-body">
+            <p>
+              <button class="btn btn-lg btn-secondary" type="button">Default Lg</button>
+              <button class="btn btn-lg btn-success" type="button">Primary Green</button>
+              <button class="btn btn-lg btn-info" type="button">Info</button>
+              <button class="btn btn-lg btn-warning" type="button">Warning</button>
+              <button class="btn btn-lg btn-danger" type="button">Danger</button>
+              <button class="btn btn-lg btn-link text-success" type="button">Link</button>
+            </p>
+            <p>
+              <button class="btn btn-secondary" type="button">Default </button>
+              <button class="btn btn-success" type="button">Primary Green</button>
+              <button class="btn btn-info" type="button">Info</button>
+              <button class="btn btn-warning" type="button">Warning</button>
+              <button class="btn btn-danger" type="button">Danger</button>
+              <button class="btn btn-link text-success" type="button">Link</button>
+            </p>
+            <p>
+              <button class="btn btn-sm btn-secondary" type="button">Default Sm</button>
+              <button class="btn btn-sm btn-success" type="button">Primary Green</button>
+              <button class="btn btn-sm btn-info" type="button">Info</button>
+              <button class="btn btn-sm btn-warning" type="button">Warning</button>
+              <button class="btn btn-sm btn-danger" type="button">Danger</button>
+              <button class="btn btn-sm btn-link text-success" type="button">Link</button>
+            </p>
+          </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-success text-white fw-bold">Button Dropdown</div>
+          <div class="card-body">
+            <div class="dropdown">
+              <button class="btn btn-success dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">View Orders</a><a class="dropdown-item" href="#">Manage Profile</a><a class="dropdown-item" href="#">Log Out</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock content %}

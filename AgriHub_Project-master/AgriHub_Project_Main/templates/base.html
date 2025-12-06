@@ -1,0 +1,95 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{% block metatitle %}AgriHub – Smart Agricultural Marketplace{% endblock metatitle %}</title>
+  <meta name="description" content="AgriHub – connecting farmers directly to consumers for fresh produce">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&family=Martel+Sans:wght@300;400;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+  <!-- Lightbox -->
+  <link rel="stylesheet" href="{% static 'vendor/lightbox2/css/lightbox.min.css' %}">
+  <!-- Range slider -->
+  <link rel="stylesheet" href="{% static 'vendor/nouislider/nouislider.min.css' %}">
+  <!-- Bootstrap select -->
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="{% static 'vendor/owl.carousel2/assets/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'vendor/owl.carousel2/assets/owl.theme.default.css' %}">
+  <!-- Theme stylesheet -->
+  <link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
+  <!-- Custom stylesheet -->
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
+</head>
+<body>
+
+  <div class="page-holder">
+
+    <!-- NAVBAR -->
+    {% include 'navbar.html' %}
+
+    <!-- MAIN CONTENT -->
+    <main>
+      {% block content %}{% endblock content %}
+    </main>
+
+    <!-- PAYMENT GATEWAY BLOCK -->
+    {% block payment-gateway %}{% endblock payment-gateway %}
+
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+
+  </div>
+
+
+
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  
+  <script>
+    if (typeof jQuery != 'undefined') {
+        $(document).ready(function() {
+            
+            // 1. Force all dropdowns to activate when the page is fully ready.
+            $('.dropdown-toggle').dropdown(); 
+            
+            // 2. Custom Smooth Scroll for Page Anchors 
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+              anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                  behavior: 'smooth'
+                });
+              });
+            });
+        });
+    }
+
+
+// In base.html, inside the final <script> block:
+
+if (typeof jQuery != 'undefined') {
+    $(document).ready(function() {
+        // ... (Dropdown initialization here) ...
+        
+        // FIX: Apply Bootstrap styling to all inputs rendered by Django forms
+        $('input:not([type="checkbox"]):not([type="radio"]), select, textarea').addClass('form-control');
+    });
+  }
+
+  </script>
+
+</body>
+</html>
+

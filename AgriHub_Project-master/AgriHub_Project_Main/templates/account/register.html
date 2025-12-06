@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    
+    <div class="container py-5">
+        <div class="row justify-content-center"> 
+            <div class="col-lg-6 col-md-8">
+
+                <h1 class="mb-4 text-center text-success fw-bold">Create Your AgriHub Account</h1>
+                
+                <div class="card border-0 shadow-lg rounded-3">
+                    <div class="card-header bg-success text-white fw-bold py-3">
+                        <small>
+                            With an AgriHub account, you can save time during checkout, access your order basket from any device, and view your order history.
+                        </small>
+                    </div>
+                    
+                    <div class="card-body p-4">
+
+                        {% include 'partials/_messages.html' %} 
+
+                        <form method="post" action="" novalidate>
+                            {% csrf_token %}
+
+
+
+                          {% for fm in form %}
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">{{ fm.label_tag }}</label>
+                                    
+                                    {{ fm }} 
+                                    
+                                    <small class="text-danger">{{ fm.errors|striptags }}</small>
+                                </div>
+                            {% endfor %}
+
+
+                            
+                            {% if form.non_field_errors %}
+                                {% for error in form.non_field_errors %}
+                                    <p class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ error }}
+                                    </p>
+                                {% endfor %}
+                            {% endif %}
+
+                            <button class="btn btn-success btn-lg mt-3" type="submit">Register Account</button>
+                        </form>
+
+                        <hr>
+
+                        <p class="text-center">Already have an account? <a href="{% url 'store:login' %}" class="text-success fw-bold">Log In </a></p>
+                        
+                    </div>
+                </div>
+
+            </div>      
+        </div>
+    </div>
+{% endblock content %}

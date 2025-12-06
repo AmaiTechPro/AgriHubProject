@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+    {% block content %}
+
+      <div class="container py-5">
+
+        <div class="row mb-4">
+            <div class="col-lg-12">
+                <h1 class="h2 text-uppercase mb-0 text-success fw-bold">My Produce Orders</h1>
+                <p class="text-muted">Track the status and delivery progress of your fresh produce orders.</p>
+            </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-12">
+            <div class="card mb-4 border-0 shadow-sm rounded-3" id="tables">
+              <div class="card-header text-center bg-success text-white fw-bold h5">Order History</div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                      <thead>
+                        <tr class="small text-uppercase">
+                          <th>#</th>
+                          <th>Produce Item</th>
+                          <th>Image</th>
+                          <th>Qty.</th>
+                          <th>Ordered Date</th>
+                          <th>Status & Progress</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        {% if orders %}
+
+                        {% for order in orders %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td class="fw-bold text-dark">{{order.product.title}}</td>
+                          <td>
+                            {% if order.product.product_image %}
+                              <img src="{{order.product.product_image.url}}" alt="{{order.product.title}}" style="width:70px; height:70px; object-fit: cover;" class="rounded">
+                            {% else %}
+                              <img src="{% static 'img/product-placeholder.jpg' %}" alt="Placeholder" style="width:70px; height:70px; object-fit: cover;" class="rounded">
+                            {% endif %}
+                          </td>
+                          <td class="fw-bold">{{order.quantity}}</td>
+                          <td>{{order.ordered_date|naturaltime}}</td>
+                          <td style="min-width: 150px;">
+                            <div class="mb-1 fw-bold small">
+                                {% if order.status == 'Cancelled' %}
+                                    <span class="text-danger">{{order.status}}</span>
+                                {% elif order.status == 'Delivered' %}
+                                    <span class="text-success">{{order.status}} 🎉</span>
+                                {% else %}
+                                    <span class="text-primary">{{order.status}}</span>
+                                {% endif %}
+                            </div>
+
+                            <div class="progress" style="height: 10px;">
+                                {% if order.status == 'Pending' %}
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 15%;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                {% elif order.status == 'Accepted' %}
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                {% elif order.status == 'Packed' %}
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                {% elif order.status == 'On The Way' %}
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                {% elif order.status == 'Delivered' %}
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                {% elif order.status == 'Cancelled' %}
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                {% endif %}
+                            </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center py-4 text-muted">You haven't placed any fresh produce orders yet.</td>
+                        </tr>
+                        {% endif %}
+
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+{% endblock content %}

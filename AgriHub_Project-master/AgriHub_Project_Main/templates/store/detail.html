@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block content %}
+
+      <section class="py-5">
+        <div class="container">
+          <div class="row mb-5">
+            <div class="col-lg-6">
+              <div class="row m-sm-0">
+
+                <div class="col-sm-12 order-1 order-sm-2">
+                  <div class="owl-carousel product-slider" data-slider-id="1">
+                    {% if product.product_image %}
+                      <a class="d-block" href="{{product.product_image.url}}" data-lightbox="product" title="{{product.title}}"><img class="img-fluid rounded shadow-sm" src="{{product.product_image.url}}" alt="{{product.title}}"></a>
+                      {% else %}
+                      <a class="d-block" href="{% static 'img/product-placeholder.jpg' %}" data-lightbox="product" title="{{product.title}}"><img class="img-fluid rounded shadow-sm" src="{% static 'img/product-placeholder.jpg' %}" alt="{{product.title}}"></a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <ul class="list-inline mb-2">
+                <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+              </ul>
+              <h1>{{product.title}}</h1>
+              <p class="text-muted lead fw-bold">${{product.price}} (per unit/kg)</p>
+              <p class="text-small mb-4">{{product.short_description}}</p>
+
+              <div class="row align-items-stretch mb-4">
+
+                <div class="col-sm-5 pr-sm-0">
+                  <div class="border d-flex align-items-center justify-content-between py-1 px-3 bg-white rounded shadow-sm">
+                    <span class="small text-uppercase text-dark mr-4 no-select fw-bold">Quantity</span>
+                    <div class="quantity d-flex align-items-center">
+                      <button class="dec-btn p-0 text-success"><i class="fas fa-minus"></i></button>
+                      <input name="quantity" class="form-control border-0 shadow-0 p-0 text-center mx-1" type="text" value="1">
+                      <button class="inc-btn p-0 text-success"><i class="fas fa-plus"></i></button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-3 pl-sm-0">
+                  <form action="{% url 'store:add-to-cart' %}">
+                    <input type="hidden" name="prod_id" value="{{product.id}}" id="product_id">
+                    <button type="submit" class="btn btn-success btn-lg btn-block h-100 d-flex align-items-center justify-content-center px-0 fw-bold">
+                      Add to Order
+                    </button>
+                  </form>
+                </div>
+
+              </div>
+
+              <a class="btn btn-link text-dark p-0 mb-4" href="#"><i class="far fa-heart mr-2"></i>Add to Wishlist</a>
+              <br>
+
+              <ul class="list-unstyled small d-inline-block">
+                <li class="px-3 py-2 mb-1 bg-light rounded"><strong class="text-uppercase">Batch/Lot ID:</strong><span class="ml-2 text-muted">{{product.sku}}</span></li>
+                <li class="px-3 py-2 mb-1 bg-light rounded text-muted"><strong class="text-uppercase text-dark">Crop Type:</strong><a class="reset-anchor ml-2" href="{% url 'store:category-products' product.category.slug %}">{{product.category}}</a></li>
+                <li class="px-3 py-2 mb-1 bg-light rounded text-muted"><strong class="text-uppercase text-dark">Harvest Tags:</strong><a class="reset-anchor ml-2" href="#">Seasonal, Local, Verified</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <ul class="nav nav-tabs border-0" id="myTab" role="tablist">
+            <li class="nav-item"><a class="nav-link active fw-bold text-success" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Full Produce Description</a></li>
+            <li class="nav-item"><a class="nav-link fw-bold text-success" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Customer Reviews</a></li>
+          </ul>
+
+          <div class="tab-content mb-5 border border-top-0 rounded-bottom" id="myTabContent">
+            <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+              <div class="p-4 p-lg-5 bg-white">
+                <h6 class="text-uppercase fw-bold text-success">Farming & Produce Details </h6>
+                <p class="text-muted text-small mb-0">{{product.detail_description}}</p>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+              <div class="p-4 p-lg-5 bg-white">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <div class="media mb-3 rounded-3 p-3 border shadow-sm"><img class="rounded-circle" src="{% static 'img/customer-1.png' %}" alt="" width="50">
+                      <div class="media-body ml-3">
+                        <h6 class="mb-0 text-uppercase text-dark fw-bold">Local Buyer Jane</h6>
+                        <p class="small text-muted mb-0 text-uppercase">20 Nov 2025</p>
+                        <ul class="list-inline mb-1 text-xs">
+                          <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                          <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                          <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                          <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                          <li class="list-inline-item m-0"><i class="fas fa-star-half-alt text-warning"></i></li>
+                        </ul>
+                        <p class="text-small mb-0 text-muted">The tomatoes were incredibly fresh and much cheaper than the market. Highly recommend this farmer!</p>
+                      </div>
+                    </div>
+                    <div class="media rounded-3 p-3 border shadow-sm"><img class="rounded-circle" src="{% static 'img/customer-2.png' %}" alt="" width="50">
+                      <div class="media-body ml-3">
+                        <h6 class="mb-0 text-uppercase text-dark fw-bold">Retailer Mark</h6>
+                        <p class="small text-muted mb-0 text-uppercase">15 Dec 2025</p>
+                        <ul class="list-inline mb-1 text-xs">
+                          <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                          <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                          <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                          <li class="list-inline-item m-0"><i class="fas fa-star text-warning"></i></li>
+                          <li class="list-inline-item m-0"><i class="fas fa-star-half-alt text-warning"></i></li>
+                        </ul>
+                        <p class="text-small mb-0 text-muted">Excellent bulk service. The cabbage batch was perfect for restocking my shop.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <h2 class="h5 text-uppercase mb-4 fw-bold text-success">Related Produce Listings</h2>
+          <div class="row g-4">
+
+            {% if related_products %}
+              {% for rp in related_products %}
+
+                <div class="col-lg-3 col-sm-6">
+                  <div class="product text-center border rounded-3 p-3 shadow-sm h-100">
+                    <div class="d-block mb-3 position-relative">
+                      <a class="d-block" href="{% url 'store:product-detail' rp.slug %}">
+                        {% if rp.product_image %}
+                          <img class="img-fluid w-100 rounded" src="{{rp.product_image.url}}" alt="{{rp.title}}">
+                        {% else %}
+                        <img class="img-fluid w-100 rounded" src="{% static 'img/product-placeholder.jpg' %}" alt="{{rp.title}}">
+                        {% endif %}
+                      </a>
+
+                      <div class="product-overlay">
+                        <ul class="mb-0 list-inline">
+                          <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-success" href="#"><i class="far fa-heart"></i></a></li>
+                          <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-success fw-bold" href="{% url 'store:add-to-cart' %}">Add to Order</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <h6> <a class="reset-anchor" href="{% url 'store:product-detail' rp.slug %}">{{rp.title}}</a></h6>
+                    <p class="small text-muted fw-bold">${{rp.price}}</p>
+                  </div>
+                </div>
+
+              {% endfor %}
+            {% endif %}
+
+
+
+          </div>
+        </div>
+      </section>
+      {% endblock content %}

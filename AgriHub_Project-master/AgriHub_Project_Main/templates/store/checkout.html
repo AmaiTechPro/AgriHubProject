@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block content %}
+
+      <div class="container">
+        <section class="py-5 bg-light rounded shadow-sm mb-4">
+          <div class="container">
+            <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+              <div class="col-lg-6">
+                <h1 class="h2 text-uppercase mb-0 text-success">Finalize Order</h1>
+              </div>
+              <div class="col-lg-6 text-lg-right">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-transparent">
+                    <li class="breadcrumb-item"><a href="{% url 'store:home' %}" class="text-dark">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'store:cart' %}" class="text-dark">Order Basket</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="py-5">
+          <h2 class="h5 text-uppercase mb-4 fw-bold">Delivery & Contact Details</h2>
+          <div class="row">
+            <div class="col-lg-8">
+              <form action="#">
+                <div class="row">
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase fw-bold" for="firstName">First name</label>
+                    <input class="form-control form-control-lg" id="firstName" type="text" placeholder="Enter your first name">
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase fw-bold" for="lastName">Last name</label>
+                    <input class="form-control form-control-lg" id="lastName" type="text" placeholder="Enter your last name">
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase fw-bold" for="email">Email address</label>
+                    <input class="form-control form-control-lg" id="email" type="email" placeholder="e.g. buyer@agrihub.com">
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase fw-bold" for="phone">Phone number</label>
+                    <input class="form-control form-control-lg" id="phone" type="tel" placeholder="e.g. +254 7XX XXX XXX">
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase fw-bold" for="company">Organization Name (optional)</label>
+                    <input class="form-control form-control-lg" id="company" type="text" placeholder="Your farm or organization name">
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase fw-bold" for="country">Country</label>
+                    <select class="selectpicker country" id="country" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country"></select>
+                  </div>
+                  <div class="col-lg-12 form-group">
+                    <label class="text-small text-uppercase fw-bold" for="address">Delivery Location 1 (Street/Area)</label>
+                    <input class="form-control form-control-lg" id="address" type="text" placeholder="House number, plot number, or street name">
+                  </div>
+                  <div class="col-lg-12 form-group">
+                    <label class="text-small text-uppercase fw-bold" for="address">Delivery Instructions (optional)</label>
+                    <input class="form-control form-control-lg" id="addressalt" type="text" placeholder="Nearest landmark, specific delivery time, etc.">
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase fw-bold" for="city">Town/City</label>
+                    <input class="form-control form-control-lg" id="city" type="text">
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase fw-bold" for="state">State/County</label>
+                    <input class="form-control form-control-lg" id="state" type="text">
+                  </div>
+
+                  <div class="col-lg-6 form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" id="alternateAddressCheckbox" type="checkbox">
+                      <label class="custom-control-label text-small fw-bold" for="alternateAddressCheckbox">Use a different contact/billing address</label>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <div class="row d-none" id="alternateAddress">
+                      <div class="col-12 mt-4">
+                        <h2 class="h4 text-uppercase mb-4 fw-bold">Alternative Contact Details</h2>
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        <label class="text-small text-uppercase fw-bold" for="firstName2">First name</label>
+                        <input class="form-control form-control-lg" id="firstName2" type="text" placeholder="Enter alternate first name">
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        <label class="text-small text-uppercase fw-bold" for="lastName2">Last name</label>
+                        <input class="form-control form-control-lg" id="lastName2" type="text" placeholder="Enter alternate last name">
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        <label class="text-small text-uppercase fw-bold" for="email2">Email address</label>
+                        <input class="form-control form-control-lg" id="email2" type="email" placeholder="e.g. billing@example.com">
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        <label class="text-small text-uppercase fw-bold" for="phone2">Phone number</label>
+                        <input class="form-control form-control-lg" id="phone2" type="tel" placeholder="e.g. +254 7XX XXX XXX">
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        <label class="text-small text-uppercase fw-bold" for="company2">Organization name (optional)</label>
+                        <input class="form-control form-control-lg" id="company2" type="text" placeholder="Alternate organization name">
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        <label class="text-small text-uppercase fw-bold" for="country2">Country</label>
+                        <select class="selectpicker country" id="country2" data-width="fit" data-style="form-control form-control-lg" data-title="Select country"></select>
+                      </div>
+                      <div class="col-lg-12 form-group">
+                        <label class="text-small text-uppercase fw-bold" for="address2">Billing Address line 1</label>
+                        <input class="form-control form-control-lg" id="address2" type="text" placeholder="House number and street name">
+                      </div>
+                      <div class="col-lg-12 form-group">
+                        <label class="text-small text-uppercase fw-bold" for="address2">Billing Address line 2</label>
+                        <input class="form-control form-control-lg" id="addressalt2" type="text" placeholder="Apartment, Suite, Unit, etc (optional)">
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        <label class="text-small text-uppercase fw-bold" for="city3">Town/City</label>
+                        <input class="form-control form-control-lg" id="city3" type="text">
+                      </div>
+                      <div class="col-lg-6 form-group">
+                        <label class="text-small text-uppercase fw-bold" for="state4">State/County</label>
+                        <input class="form-control form-control-lg" id="state4" type="text">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 form-group mt-3">
+                    <button class="btn btn-success btn-lg" type="submit">Place Final Order</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="card border-0 rounded-3 p-lg-4 bg-light shadow-sm">
+                <div class="card-body">
+                  <h5 class="text-uppercase mb-4 fw-bold">Your Order Summary</h5>
+                  <ul class="list-unstyled mb-0">
+                    <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">Farm-Fresh Tomatoes (5kg)</strong><span class="text-muted small">$15.00</span></li>
+                    <li class="border-bottom my-2"></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">Local Honey (1 Jar)</strong><span class="text-muted small">$12.50</span></li>
+                    <li class="border-bottom my-2"></li>
+                    <li class="d-flex align-items-center justify-content

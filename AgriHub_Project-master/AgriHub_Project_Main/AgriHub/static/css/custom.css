@@ -1,0 +1,64 @@
+/* --- AgriHub Image Consistency Fix --- */
+
+/* Targets images within the product container */
+.product .img-fluid,
+.card-img-top {
+    /* Sets a fixed height for all product images */
+    height: 250px !important;
+    /* Ensures the image fills the fixed space without stretching or distorting */
+    object-fit: cover;
+    /* Centers the image if it's smaller than the box */
+    object-position: center;
+    /* Ensures the image container itself behaves like a block */
+    width: 100%;
+}
+
+/* Optional: Fixes image size in the Cart/Order table */
+.table-responsive img {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+}
+
+/* --- AgriHub CATEGORY IMAGE CONSISTENCY FIX --- */
+
+/* Targets the <img> element specifically inside the category item links */
+.category-item img {
+    /* Set a fixed height for visual uniformity across all category tiles */
+    height: 250px !important;
+
+    /* Ensure the image covers the entire fixed height without distortion */
+    object-fit: cover;
+
+    /* Ensures the image takes the full width of its column */
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Button Alignment Consistency Fix (Flexbox) --- */
+
+/* 1. Sets the entire card as a flexible container oriented vertically */
+.product.text-center {
+    display: flex;
+    flex-direction: column;
+    /* The h-100 class in the HTML ensures it takes full available height */
+}
+
+/* 2. Targets the form/button and pushes it to the bottom margin */
+.product form {
+    margin-top: auto !important;
+}
+
+

@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% for message in messages %}
+    <div class="container mt-3">
+        <p class="alert alert-success">{{ message }}</p>
+    </div>
+    {% endfor %}
+    
+    <div class="container">
+        
+        <section class="py-5 bg-light rounded shadow-sm mb-4">
+            <div class="container">
+                <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="h2 text-uppercase mb-0 text-success fw-bold">Contact AgriHub Support</h1>
+                    </div>
+                    <div class="col-lg-6 text-lg-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-transparent">
+                                <li class="breadcrumb-item"><a href="{% url 'store:home' %}" class="text-dark">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="row g-5">
+                
+                <div class="col-lg-7">
+                    <h3 class="text-success mb-4 fw-bold">Send us a Message</h3>
+                    <p class="text-muted">
+                        Whether you are a buyer with an order question or a farmer needing technical support, use the form below to reach our dedicated team.
+                    </p>
+
+                    <form action="{% url 'store:contact' %}" method="POST" class="mt-4">
+                        {% csrf_token %} <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label small fw-bold">Your Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="email" class="form-label small fw-bold">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+                            </div>
+                            
+                            <div class="col-12">
+                                <label for="subject" class="form-label small fw-bold">Subject</label>
+                                <input type="text" class="form-control" id="subject" name="subject" placeholder="Order Inquiry, Farmer Support, etc." required>
+                            </div>
+                            
+                            <div class="col-12">
+                                <label for="message" class="form-label small fw-bold">Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your question or detailed message..." required></textarea>
+                            </div>
+                            
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn btn-success btn-lg shadow-sm">Submit Request</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="col-lg-5">
+                    <div class="card border-0 shadow-sm bg-light rounded-3 p-4">
+                        <h4 class="fw-bold mb-3 text-dark">Our Details</h4>
+                        
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-success">General Inquiries</h6>
+                            <p class="text-muted mb-0">Email: support@agrihub.co.ke</p>
+                            <p class="text-muted mb-0">Phone: +254 745 422 895</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-success">Physical Location</h6>
+                            <p class="text-muted mb-0">Dedan Kimathi University of Technology</p>
+                            <p class="text-muted mb-0">Innovation Centre</p>
+                            <p class="text-muted mb-0">Nyeri, Kenya</p>
+                        </div>
+                        
+                        <div class="mb-0">
+                            <h6 class="fw-bold text-success">Operating Hours</h6>
+                            <p class="text-muted mb-0">Mon - Fri: 8:00 AM – 5:00 PM (EAT)</p>
+                            <p class="text-muted mb-0">Sat: 9:00 AM – 1:00 PM (EAT)</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+{% endblock content %}

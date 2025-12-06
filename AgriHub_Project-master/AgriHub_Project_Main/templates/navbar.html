@@ -1,0 +1,134 @@
+{% load static %}
+
+<header class="header bg-gradient-dark position-relative">
+    <div class="header-wave position-absolute w-100" style="bottom: -30px; left: 0; overflow: hidden; line-height: 0;">
+        <svg viewBox="0 0 1200 60" preserveAspectRatio="none" style="display: block; width: 100%; height: 30px;">
+            <path d="M0,60 C300,0 900,0 1200,60 L1200,0 L0,0 Z" fill="#111"></path>
+        </svg>
+    </div>
+
+    <div class="container px-0 px-lg-3 position-relative">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3 px-lg-0">
+
+            <a class="navbar-brand logo-anchor-final" href="{% url 'store:home' %}">
+                <img src="{% static 'img/agrihub_logo.png' %}"
+                     alt="AgriHub Marketplace"
+                     style="height: 75px; width: 75px; border-radius: 50px;"> 
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+          <div>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav mb-2 mb-lg-0"> 
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'store:home' %}">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-bs-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">Crop Types</a>
+                        <ul class="dropdown-menu mt-2" aria-labelledby="pagesDropdown">
+                            {% if categories_menu %}
+                                {% for cat_menu in categories_menu %}
+                                    <li><a class="dropdown-item" href="{% url 'store:category-products' cat_menu.slug %}">{{cat_menu.title}}</a></li>
+                                {% endfor %}
+                            {% endif %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'store:all-categories' %}">All Produce</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="{% url 'store:blog' %}">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'store:contact' %}">Contact</a></li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store:cart' %}">
+                            <i class="fas fa-dolly-flatbed me-1"></i>Order Basket<small>({{cart_items.count}})</small>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store:home' %}">
+                            <i class="far fa-heart me-1"></i><small> (0)</small>
+                        </a>
+                    </li>
+                </ul>
+     <div class="ms-auto">
+                {% if request.user.is_authenticated %}
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"> 
+                        <li class="nav-item dropdown">
+                            <a class=" btn nav-link dropdown-toggle" id="accountDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-alt me-1"></i>My Account
+                            </a>
+                            <ul class="dropdown-menu mt-2 dropdown-menu-end" aria-labelledby="accountDropdown">
+                                <li><a class="dropdown-item" href="{% url 'store:profile' %}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'store:orders' %}">Orders</a></li>
+                                <li><a class="dropdown-item" href="{% url 'store:password-change' %}">Change Password</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form action="{% url 'store:logout' %}" method="post" style="display: none;" id="logoutForm">
+                                    {% csrf_token %}
+                                    <input type="submit" value="Log Out" style="display: none;">
+                                    </form>
+                                    <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                {% else %}
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item me-2"><a class="btn btn-sm btn-outline-success" href="{% url 'store:login' %}">Login</a></li>
+                        <li class="nav-item"><a class="btn btn-sm btn-success" href="{% url 'store:register' %}">Create Account</a></li>
+                    </ul>
+                {% endif %}
+       </div>
+            </div>
+        </nav>
+
+     
+</div>
+
+
+    
+    <style>
+        .bg-gradient-dark {
+            background: linear-gradient(180deg, #111111 0%, #1a1a1a 100%);
+        }
+
+        /* FINAL AGGRESSIVE CSS OVERRIDE FOR LOGO PLACEMENT */
+        .navbar {
+            position: relative !important; 
+            z-index: 100;
+        }
+        
+        .logo-anchor-final {
+            /* Anchors the logo to the top-left corner of the navbar */
+            position: absolute !important;
+            left: 20px !important; 
+            top: 50%; /* Vertically centers the logo */
+            transform: translateY(-50%);
+            z-index: 101; 
+            /* Removes conflicting margins */
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Adjusts links to account for the logo's fixed position */
+        .navbar-nav:first-of-type {
+            /* Pushes the links out from under the absolutely positioned logo */
+            margin-left: 100px !important; 
+        }
+        
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #5cb85c;
+            transition: 0.3s;
+        }
+    </style>
+</header>

@@ -1,0 +1,92 @@
+{% load static %}
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/lightbox2/js/lightbox.min.js' %}"></script>
+<script src="{% static 'vendor/nouislider/nouislider.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'vendor/owl.carousel2/owl.carousel.min.js' %}"></script>
+<script src="{% static 'vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js' %}"></script>
+<script src="{% static 'js/front.js' %}"></script>
+
+
+<style>
+  /* --- Color Consistency Fix --- */
+  /* Ensures buttons, links, and slider components use the AgriHub green */
+  .btn-success {
+    background-color: #1e7d36 !important; /* Deep Green */
+    border-color: #1e7d36 !important;
+    color: #fff !important;
+  }
+  .btn-success:hover {
+    background-color: #218838 !important;
+    border-color: #218838 !important;
+  }
+  .text-success {
+    color: #1e7d36 !important;
+  }
+  /* NouiSlider Consistency (used on product/filter pages) */
+  .noUi-connect {
+    background: #1e7d36;
+  }
+  .noUi-handle {
+    border: 2px solid #1e7d36;
+  }
+
+  /* Footer Link Hover Consistency */
+  .footer-link:hover {
+    color: #5cb85c; /* Lighter hover green */
+    text-decoration: none;
+    transition: 0.3s;
+  }
+</style>
+
+
+<script>
+  var range = document.getElementById('range');
+  if (range) { // Check if the element exists before initializing
+      noUiSlider.create(range, {
+          range: {
+              'min': 0,
+              'max': 2000
+          },
+          step: 5,
+          start: [100, 1000],
+          margin: 300,
+          connect: true,
+          direction: 'ltr',
+          orientation: 'horizontal',
+          behaviour: 'tap-drag',
+          tooltips: true,
+          format: {
+            to: function ( value ) {
+              return '$' + value;
+            },
+            from: function ( value ) {
+              return value.replace('', '');
+            }
+          }
+      });
+  }
+</script>
+
+<script>
+  // ------------------------------------------------------- //
+  //   Inject SVG Sprite
+  // ------------------------------------------------------ //
+  function injectSvgSprite(path) {
+
+      var ajax = new XMLHttpRequest();
+      ajax.open("GET", path, true);
+      ajax.send();
+      ajax.onload = function(e) {
+      var div = document.createElement("div");
+      div.className = 'd-none';
+      div.innerHTML = ajax.responseText;
+      document.body.insertBefore(div, document.body.childNodes[0]);
+      }
+  }
+  // Using a reliable CDN link for FontAwesome icons
+  injectSvgSprite('https://cdn.jsdelivr.net/gh/devicons/devicon/icons/orion-svg-sprite.svg');
+
+</script>

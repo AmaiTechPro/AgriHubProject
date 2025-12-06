@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    
+    <div class="container">
+        <section class="py-5 bg-light rounded shadow-sm mb-4">
+            <div class="container">
+                <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="h2 text-uppercase mb-0 text-success fw-bold">AgriHub Insights</h1>
+                    </div>
+                    <div class="col-lg-6 text-lg-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-transparent">
+                                <li class="breadcrumb-item"><a href="{% url 'store:home' %}" class="text-dark">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5">
+            <div class="row g-4">
+                
+                <div class="col-lg-8">
+                    <h3 class="text-success mb-4 fw-bold">Latest Farmer Stories</h3>
+
+                    <div class="card mb-4 border-0 shadow-sm rounded-3">
+                        <img src="{% static 'img/digital.png' %}" alt="Farmer working" class="card-img-top img-fluid" style="height: 350px; object-fit: cover;">
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold">Digital Farming: The Future of Kenyan Yields</h4>
+                            <p class="card-text text-muted small mb-3">
+                                <i class="fas fa-calendar-alt me-2"></i>Dec 4, 2025 | 
+                                <i class="fas fa-tag mx-2"></i>Technology, Innovation
+                            </p>
+                            <p class="card-text">
+                                We explore how IoT sensors and data analytics are helping smallholder farmers optimize water use and improve crop disease detection, leading to record harvests. This innovation is key to ensuring food security.
+                            </p>
+                            <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 border-0 shadow-sm rounded-3">
+                        <img src="{% static 'img/volatility.png' %}" alt="Maize harvest" class="card-img-top img-fluid" style="height: 350px; object-fit: cover;">
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold">Market Price Volatility: Tips for Grain Sellers</h4>
+                            <p class="card-text text-muted small mb-3">
+                                <i class="fas fa-calendar-alt me-2"></i>Nov 28, 2025 | 
+                                <i class="fas fa-tag mx-2"></i>Economics, Grains
+                            </p>
+                            <p class="card-text">
+                                Understanding seasonal demand cycles is crucial for maximizing profit. AgriHub provides real-time data to help you sell your maize and wheat at the optimal time.
+                            </p>
+                            <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+                <div class="col-lg-4">
+                    
+                    <div class="card border-0 shadow-sm mb-4 rounded-3">
+                        <div class="card-header bg-success text-white fw-bold">Search Blog</div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Search for crops...">
+                                <button class="btn btn-success" type="button"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 shadow-sm mb-4 rounded-3">
+                        <div class="card-header bg-light fw-bold">Blog Categories</div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><a href="#" class="text-dark">Technology in Farming (4)</a></li>
+                                <li class="mb-2"><a href="#" class="text-dark">Market Pricing (7)</a></li>
+                                <li class="mb-2"><a href="#" class="text-dark">Crop Disease Control (2)</a></li>
+                                <li class="mb-2"><a href="#" class="text-dark">Sustainable Methods (5)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 shadow-sm mb-4 rounded-3">
+                        <div class="card-header bg-light fw-bold">Archives</div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><a href="#" class="text-dark">December 2025</a></li>
+                                <li class="mb-2"><a href="#" class="text-dark">November 2025</a></li>
+                                <li class="mb-2"><a href="#" class="text-dark">October 2025</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </div>
+{% endblock content %}
