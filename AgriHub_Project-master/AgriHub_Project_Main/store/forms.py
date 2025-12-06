@@ -50,3 +50,34 @@ class SetPasswordForm(SetPasswordForm):
     new_password1 = forms.CharField(label=_("New Password"), strip=False, widget=forms.PasswordInput(attrs={'autocomplete':'new-password', 'class':'form-control'}), help_text=password_validation.password_validators_help_text_html())
     new_password2 = forms.CharField(label=_("Confirm Password"), strip=False, widget=forms.PasswordInput(attrs={'autocomplete':'new-password','class':'form-control'}))
 
+
+
+
+
+
+# In store/forms.py, ADD THIS CODE BLOCK:
+
+from django import forms
+from .models import Product # Import the Product model (Produce Item)
+
+class FarmerProductForm(forms.ModelForm):
+    # This form is used by the front-end dashboard for farmers
+    class Meta:
+        model = Product
+        fields = [
+            'title', 'slug', 'batch_id', 'origin', 
+            'produce_details', 'product_image', 'price_per_unit', 
+            'unit_type', 'harvest_date', 'category', 
+            'is_active', 'is_featured'
+        ]
+        
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'slug': forms.TextInput(attrs={'class': 'form-control'}),
+            'batch_id': forms.TextInput(attrs={'class': 'form-control'}),
+            'origin': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+            'produce_details': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
+            'product_image': forms.FileInput(attrs={'class': 'form-control'}),
+            'price_per_unit': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
+            'harvest_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        }

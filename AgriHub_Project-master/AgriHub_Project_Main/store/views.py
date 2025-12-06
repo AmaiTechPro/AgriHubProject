@@ -9,6 +9,9 @@ from decimal import Decimal # Required for handling Decimal field calculati
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group # Needed for Group checks
 from .models import FarmerProfile # Needed for Farmer specific data
+# In store/views.py, near the top:
+from .forms import FarmerProductForm # <<< ADD THIS LINE
+# ... (Ensure this is present alongside other imports)
 
 
 
@@ -247,7 +250,7 @@ def farmer_delete_produce(request, pk):
         # The actual delete operation
         product.delete()
         messages.success(request, f"Produce '{product.title}' successfully deleted.")
-        return redirect('store:home') # Redirect to homepage or dashboard
+        return redirect('store:farmer-dashboard') # Redirect to homepage or dashboard
         
     context = {'product': product}
     return render(request, 'store/farmer_confirm_delete.html', context)\
@@ -274,7 +277,7 @@ def farmer_edit_produce(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, f"Produce '{product.title}' updated successfully.")
-            return redirect('store:home') # Redirect to homepage or dashboard
+            return redirect('store:farmer-dashboard') # Redirect to homepage or dashboard
         else:
             messages.error(request, "Update failed. Please correct errors.")
     else:
@@ -303,7 +306,7 @@ def add_produce_view(request):
             form.save()
             
             messages.success(request, "New produce item added successfully!")
-            return redirect('store:home') # Redirect to the homepage or a dashboard
+            return redirect('store:farmer-dashboard') # Redirect to the homepage or a dashboard
         else:
             messages.error(request, "Failed to add product. Check required fields and try again.")
     else:
@@ -312,3 +315,16 @@ def add_produce_view(request):
 
     context = {'form': form}
     return render(request, 'store/farmer_add_produce.html', context)
+
+
+
+    # In store/views.py
+
+@login_required
+def farmer_dashboard(request):
+    """Lists all produce items belonging to the current user (Farmer)."""
+    # NOTE: We fetch all products for now to show the list, but only the farmer user should see this link.
+    products = Product.objects.all().order_by('-created_at')
+
+    context = {'products': products}
+    return render(request, 'store/farmer_dashboard.html', context)

@@ -35,12 +35,13 @@
 {% if request.user.is_authenticated and request.user.groups.all.0.name == 'Farmer_Seller' %}
 <li class="nav-item">
     <a class="nav-link btn btn-sm btn-success text-white" 
-       href="/admin/store/product/add/" 
+       href=" {% url 'store:farmer-dashboard' %}" 
        style="padding: 5px 10px; margin-left: 10px;">
-        + ADD PRODUCE
+        FARMER DASHBOARD
     </a>
 </li>
 {% endif %}
+
 
 
 

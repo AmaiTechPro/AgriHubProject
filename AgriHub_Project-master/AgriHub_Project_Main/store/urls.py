@@ -50,6 +50,15 @@ urlpatterns = [
     
     # ... rest of paths ...
 
+    # In store/urls.py
+
+    # ... existing paths ...
+    path('farmer/dashboard/', views.farmer_dashboard, name="farmer-dashboard"),
+    path('farmer/add-produce/', views.add_produce_view, name="add-produce-form"),
+    path('farmer/edit/<int:pk>/', views.farmer_edit_produce, name="edit-produce"),
+    path('farmer/delete/<int:pk>/', views.farmer_delete_produce, name="delete-produce"),
+    # ... rest of paths ...
+
 
 
     # URL for Products (Specific Paths)
