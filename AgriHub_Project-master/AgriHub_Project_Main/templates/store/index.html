@@ -6,7 +6,7 @@
 
 <!-- HERO SECTION -->
 <section id="hero" class="hero d-flex align-items-center justify-content-center text-center position-relative" 
-         style="background: url({% static 'img/hero-agri-banner.jpg' %}) no-repeat center center; background-size: cover; min-height: 85vh;">
+         style="background: url({% static 'img/hero-agri-banner.png' %}) no-repeat center center; background-size: cover; min-height: 85vh;">
     
     <div class="overlay position-absolute w-100 h-100" style="background-color: rgba(27, 43, 27, 0.5); top:0; left:0;"></div>
 
@@ -79,7 +79,7 @@
               </a>
               <div class="card-body">
                 <h5 class="card-title"><a class="text-dark" href="{% url 'store:product-detail' product.slug %}">{{ product.title }}</a></h5>
-                <p class="card-text text-muted">${{ product.price }}</p>
+                <p class="small text-muted"><strong>KSh {{ product.price_per_unit|floatformat:2 }} / {{ product.unit_type }} </strong></p>
                 <form action="{% url 'store:add-to-cart' %}" method="get">
                   <input type="hidden" name="prod_id" value="{{ product.id }}">
                   <button type="submit" class="btn btn-sm btn-dark">Add to Cart</button>

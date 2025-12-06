@@ -81,3 +81,22 @@ class FarmerProductForm(forms.ModelForm):
             'price_per_unit': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
             'harvest_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
         }
+
+
+
+        # In store/forms.py, ADD THIS CODE BLOCK:
+
+from .models import Address # Import the Address model
+
+class AddressForm(forms.ModelForm):
+    # This form handles adding or editing a delivery address
+    class Meta:
+        model = Address
+        # Use only the non-Foreign Key fields visible to the user
+        fields = ['locality', 'city', 'state'] 
+        
+        widgets = {
+            'locality': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nearest Location / Area'}),
+            'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City / Town'}),
+            'state': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'County'}),
+        }

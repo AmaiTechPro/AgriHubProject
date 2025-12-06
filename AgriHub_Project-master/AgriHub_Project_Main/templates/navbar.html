@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <header class="header bg-gradient-dark position-relative">
@@ -7,14 +8,21 @@
         </svg>
     </div>
 
-    <div class="container px-0 px-lg-3 position-relative">
-        <nav class="navbar navbar-expand-lg navbar-dark py-3 px-lg-0">
 
-            <a class="navbar-brand logo-anchor-final" href="{% url 'store:home' %}">
+    # Logo Placement at top top-left
+
+     <a class="navbar-brand logo-anchor-final" href="{% url 'store:home' %}">
                 <img src="{% static 'img/agrihub_logo.png' %}"
                      alt="AgriHub Marketplace"
-                     style="height: 75px; width: 75px; border-radius: 50px;"> 
+                     style="height: 80px; width: 80px; border-radius: 50px;"> 
             </a>
+
+
+
+    <div class="container px-2 px-lg-3 position-relative">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3 px-lg-0">
+
+       
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -153,5 +161,49 @@
             color: #5cb85c;
             transition: 0.3s;
         }
+
+        
+
+
+        /* Inside the <style> block in navbar.html */
+
+/* 1. Sets the Navbar as the Anchor Point */
+.navbar {
+    /* Makes the navbar the reference point for the logo's absolute position */
+    position: relative !important; 
+    z-index: 100;
+}
+
+/* 2. ABSOLUTE POSITIONING FIX (The Logo itself) */
+.logo-anchor-final {
+    /* Anchors the logo to the top-left corner */
+    position: absolute !important;
+    left: 20px !important; /* Distance from the screen edge */
+    top: 50%; /* Vertically centers the logo */
+    transform: translateY(-50%);
+    z-index: 101; 
+    /* Remove conflicting margins */
+    margin: 0 !important; 
+    padding: 0 !important;
+}
+
+/* 3. PUSH LINKS AWAY */
+.navbar-nav:first-of-type {
+    /* Pushes the links out from under the absolutely positioned logo */
+    margin-left: 100px !important; 
+}
+
+
     </style>
 </header>
+
+
+
+
+
+
+
+
+
+
+

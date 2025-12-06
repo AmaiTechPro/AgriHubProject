@@ -12,7 +12,7 @@ from .models import FarmerProfile # Needed for Farmer specific data
 # In store/views.py, near the top:
 from .forms import FarmerProductForm # <<< ADD THIS LINE
 # ... (Ensure this is present alongside other imports)
-
+from .forms import AddressForm # <<< Ensure this is imported
 
 
 # --- AGRIHUB MODELS ---
@@ -171,15 +171,29 @@ def profile(request):
     context = {'addresses': addresses}
     return render(request, 'account/profile.html', context)
 
+    
+
+# In store/views.py, find and REPLACE the existing AddressView class:
+
 class AddressView(View):
-    """Handles adding a new delivery address."""
-    # NOTE: Assuming AddressForm is defined elsewhere
     def get(self, request):
-        return render(request, 'account/add_address.html')
+        form = AddressForm() # Instantiate a blank form for GET
+        return render(request, 'account/add_address.html', {'form': form})
 
     def post(self, request):
-        # Placeholder for saving address form data
-        return redirect('store:profile')
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            # Save the address, but associate it with the current user
+            address = form.save(commit=False)
+            address.user = request.user 
+            address.save()
+            messages.success(request, "New delivery address saved successfully!")
+            return redirect('store:profile')
+        else:
+            messages.error(request, "Failed to save address. Check fields.")
+            return render(request, 'account/add_address.html', {'form': form})
+
+
 
 @login_required
 def remove_address(request, id):
@@ -328,3 +342,26 @@ def farmer_dashboard(request):
 
     context = {'products': products}
     return render(request, 'store/farmer_dashboard.html', context)
+
+
+
+
+
+# --- Check and Confirm Logic ---
+
+@login_required
+def plus_cart(request, cart_id):
+    c = Cart.objects.get(id=cart_id)
+    c.quantity += 1
+    c.save()
+    # The redirect is correct, but let's confirm the logic for minus_cart:
+    return redirect('store:cart')
+
+@login_required
+def minus_cart(request, cart_id):
+    c = Cart.objects.get(id=cart_id)
+    if c.quantity > 1:
+        c.quantity -= 1
+        c.save()
+    # The redirect is correct:
+    return redirect('store:cart')
