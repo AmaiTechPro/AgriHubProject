@@ -149,10 +149,44 @@ def minus_cart(request, cart_id):
     return redirect('store:cart')
 
 
+
+
+
+# In store/views.py, ensure these imports are present at the top:
+from django.contrib.auth.decorators import login_required
+from decimal import Decimal # Essential for price calculations
+from .models import Product, Cart, Address 
+from django.shortcuts import render 
+
+
+@login_required
 def checkout(request):
-    """Renders the checkout page (Placeholder logic for now)."""
-    # NOTE: This should contain the final order creation logic in a real app.
-    return render(request, 'store/checkout.html')
+    user = request.user
+    
+    # 1. Fetch products in the cart and user addresses
+    cart_products = Cart.objects.filter(user=user)
+    addresses = Address.objects.filter(user=user)
+
+    # 2. Calculate Totals (Logic copied from the working cart view)
+    amount = Decimal(0)
+    for p in cart_products:
+        # We must calculate the subtotal for each item and sum it up
+        amount += (p.quantity * p.product.price_per_unit)
+        
+    shipping_amount = Decimal(10) # Assuming a fixed shipping fee
+    total_amount = amount + shipping_amount
+
+    # 3. Pass all necessary variables to the template
+    context = {
+        'cart_products': cart_products, # Required for item loop in summary
+        'addresses': addresses,
+        'amount': amount,
+        'shipping_amount': shipping_amount,
+        'total_amount': total_amount, # Required for the final summary display
+    }
+    return render(request, 'store/checkout.html', context)
+
+
 
 
 @login_required

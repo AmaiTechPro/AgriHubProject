@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% load humanize %}
+
     {% block content %}
 
       <div class="container">
@@ -105,6 +107,8 @@
                       <div class="col-lg-6 form-group">
                         <label class="text-small text-uppercase fw-bold" for="country2">Country</label>
                         <select class="selectpicker country" id="country2" data-width="fit" data-style="form-control form-control-lg" data-title="Select country"></select>
+                       
+
                       </div>
                       <div class="col-lg-12 form-group">
                         <label class="text-small text-uppercase fw-bold" for="address2">Billing Address line 1</label>
@@ -132,16 +136,51 @@
               </form>
             </div>
 
-            <div class="col-lg-4">
-              <div class="card border-0 rounded-3 p-lg-4 bg-light shadow-sm">
-                <div class="card-body">
-                  <h5 class="text-uppercase mb-4 fw-bold">Your Order Summary</h5>
-                  <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">Farm-Fresh Tomatoes (5kg)</strong><span class="text-muted small">$15.00</span></li>
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">Local Honey (1 Jar)</strong><span class="text-muted small">$12.50</span></li>
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content
+        
 
 
+
+
+                    <div class="col-lg-4">
+    <div class="card border-0 rounded-3 p-lg-4 bg-light shadow-sm">
+        <div class="card-body">
+            <h5 class="text-uppercase mb-4 fw-bold">Your Order Summary</h5>
+            <ul class="list-unstyled mb-0">
+                
+                {% for cart_product in cart_products %}
+                    {% if cart_product.product %}
+                        <li class="d-flex align-items-center justify-content-between">
+                            <strong class="small font-weight-bold">
+                                {{ cart_product.product.title }} (x{{ cart_product.quantity }})
+                            </strong>
+                            <span class="text-muted small">
+                                KSh {{ cart_product.total_price|intcomma }}
+                            </span>
+                        </li>
+                        <li class="border-bottom my-2"></li>
+                    {% endif %}
+                {% endfor %}
+                
+                <li class="d-flex align-items-center justify-content-between">
+                    <strong class="text-uppercase small font-weight-bold">Subtotal</strong>
+                    <span class="text-muted small">KSh {{amount|intcomma}}</span>
+                </li>
+                
+                <li class="d-flex align-items-center justify-content-between">
+                    <strong class="text-uppercase small font-weight-bold">Delivery Charge</strong>
+                    <span class="text-muted small">+KSh {{shipping_amount|intcomma}}</span>
+                </li>
+                
+                <li class="border-bottom my-2"></li>
+                
+                <li class="d-flex align-items-center justify-content-between mb-4">
+                    <strong class="text-uppercase small font-weight-bold">Grand Total</strong>
+                    <span class="fw-bold text-success">KSh {{total_amount|intcomma}}</span>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+                  
   {% endblock %}
