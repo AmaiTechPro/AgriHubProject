@@ -45,9 +45,14 @@ for secure user management.
 
 
 
-📸 PROJECT VISUALS
+📸 FULL VISUAL PORTFOLIO & FEATURE WALKTHROUGH
 
 
+
+This comprehensive PDF contains all 12 sequential screenshots and professional captions,
+detailing the full feature set of the AgriHub Marketplace, including RBAC and Order Management.
+
+https://docs.google.com/document/d/1MEx0r7WK8cJDv4Ws4MqMjIVRwthEy30__UDEGxOOCv8/edit?usp=sharing
 
 
 
