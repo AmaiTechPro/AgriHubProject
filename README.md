@@ -56,6 +56,27 @@ https://docs.google.com/document/d/1MEx0r7WK8cJDv4Ws4MqMjIVRwthEy30__UDEGxOOCv8/
 
 
 
+
+
+
+
+🔗 LIVE PROJECT DEPLOYMENT
+
+The AgriHub Smart Agricultural Marketplace is currently deployed and functional at:
+https://amaitechpro.pythonanywhere.com
+
+
+
+⚠️ Note on Access:
+To conserve hosting resources and CPU usage, the application is protected  with password gateway.
+To obtain temporary access credentials for testing and review, please reach out to me
+directly via my contact information below.
+
+
+
+
+
+
 🚀 GETTING STARTED (INSTALLATION GUIDE) 
 
 
